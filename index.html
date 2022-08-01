@@ -1,0 +1,867 @@
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Squires | KOTE</title>
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='stylesheet' href='https://use.typekit.net/zfg0nzf.css'>
+  <link rel="stylesheet" href="https://knightsoftheether.com/tnet-main/css/style.css?28">
+
+ <meta name="description" content="Squires by Knights of The Ether">
+ 
+    <!--OG-->
+  <meta property="og:title" content="Squires by Knights of The Ether" />
+<meta property="og:description" content="Squires is an on-chain inventory management game to refine the inventory of your Knight for Knights of the Ethers' upcoming deck-building game." />
+<meta property="og:url" content="https://knightsoftheether.com/" />
+<meta property="og:image" content="https://knightsoftheether.com/squires/images/wisdomG.png" />
+<meta property="og:site_name" content="Squires by Knights of The Ether" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+
+<!--Twitter-->
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Squires by Knights of The Ether"/>
+<meta name="twitter:description" content="Squires is an on-chain inventory management game to refine the inventory of your Knight for Knights of the Ethers' upcoming deck-building game."/>
+<meta name="twitter:site" content="@KnightsOfTheEth"/>
+<meta name="twitter:image" content="https://knightsoftheether.com/squires/images/wisdomG.png"/>
+<meta name="twitter:creator" content="@KnightsOfTheEth"/>
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" href="https://knightsoftheether.com/squires/images/unnamed.png" sizes="180x180">
+  <link rel="icon" href="https://knightsoftheether.com/squires/images/unnamed.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="https://knightsoftheether.com/squires/images/unnamed.png" sizes="16x16" type="image/png">
+  <link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+  <link rel="icon" href="https://knightsoftheether.com/squires/images/unnamed.png">
+  
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="Site">
+	<!-- menus -->
+	<div id="Menus">
+		<!-- inventory -->
+		<div id="Inventory">
+			<header id="Inventory__Header" class="menu-header">
+				<div class="menu-label">Inventory</div>
+			</header>
+			<main id="Inventory__Main" class="menu-main">
+				<button id="Inventory-Squires-Trigger" class="item inventory-item">
+					<header class="item-header"><span id="squireTotal"></span> Squires</header>
+					<main class="item-main"><img class="menu-icon" src="https://knightsoftheether.com/beta/i/kote-icon-book.png"></main>
+				</button>
+				<button id="Inventory-Fief-Trigger" class="item inventory-item">
+					<header class="item-header"><span id="fiefTotal"></span> $FIEF</header>
+					<main class="item-main"><img class="menu-icon" src="https://knightsoftheether.com/beta/i/kote-icon-inventory.png"></main>
+				</button>
+				<button id="Inventory-Potion-Trigger" class="item inventory-item">
+					<header class="item-header"><span id="potionTotal"></span> Potions</header>
+					<main class="item-main"><img class="menu-icon" src="https://knightsoftheether.com/beta/i/kote-icon-alchemy.png"></main>
+				</button>
+				<button id="Inventory-Ring-Trigger" class="item inventory-item">
+					<header class="item-header"><span id="ringTotal"></span> Rings</header>
+					<main class="item-main"><img class="menu-icon" src="https://knightsoftheether.com/beta/i/kote-icon-jewelry.png"></main>
+				</button>
+				<button id="Inventory-Trinket-Trigger" class="item inventory-item">
+					<header class="item-header"><span id="trinketTotal"></span> Trinkets</header>
+					<main class="item-main"><img class="menu-icon" src="https://knightsoftheether.com/beta/i/kote-icon-runes.png"></main>
+				</button>
+				<button id="Inventory-Gear-Trigger" class="item inventory-item">
+					<header class="item-header">0 Gear</header>
+					<main class="item-main"><img class="menu-icon" src="https://knightsoftheether.com/beta/i/kote-icon-craft.png"></main>
+				</button>
+			</main>
+		</div>
+		<!-- questing -->
+		
+    	<!-- mountain -->
+		<div id="Mountain-Menu__Send" class="menu quest-menu">
+			<header class="menu-header">
+				<button  id="Close-Mountain-Send" class="close-menu"></button>
+				<div class="menu-label">Mountain</div>
+				<!--<p class="menu-description" id="Mountain-Description-Send">Mountain Questing will Begin Shortly</p>-->
+				<p class="menu-description" id="Mountain-Description-Send">Select the squires you would like to send off questing</p>
+				<button id="Mountain-return" class="btn" onclick="runQuestingmountain()">Check Squires Ready to Return</button>
+				<button id="refresh-return-mountain" class="btn" onclick="runTownmountain()">Refresh</button>
+			</header>
+			<main id="Mountain-Console-Send" class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+					        <div id="squiresWaitingMountain"></div>
+					</div>
+					<footer class="menu-controls">
+						<button class="btn" id="Mountain-Send-Some" style="display:none" onclick="sign.questMountainFew()"><span class="num-selected"><span id="questorsM"></span></span></button>
+						<button class="btn" id="Mountain-Send-All" onclick="sign.questMountainAll()">Send All</button>
+					</footer>
+				</div>
+			</main>
+		</div>
+		
+		<div id="Mountain-Menu__Return" class="menu quest-menu">
+			<header class="menu-header">
+				<button id="Close-Mountain-Return" class="close-menu"></button>
+				<div class="menu-label">Mountain</div>
+				<p class="menu-description" id="Mountain-Description-Return">Select the squires you would like to return from questing</p>
+				<p class="menu-description" id="Mountain-Description-Returning" style="display:none">Returning Squires and Gathering Rewards<br><img class="menu-description" style="width:25%; display: block;margin-left: auto;margin-right: auto;" src="https://knightsoftheether.com/tnet/images/loading.gif"><br><i style="color:grey">Gathering rewards can take up to 3 minutes</i></p>
+				<button id="Mountain-quest" class="btn" onclick="runTownmountain()">Check Squires Ready to Quest</button>
+				<p id="Mountain-message" class="menu-description" style="color:grey; text-size:20px">*If you can't see your squires, hit <i>refresh</i> below</p>
+				<button id="refresh-quest-mountain" class="btn" onclick="runQuestingmountain()">Refresh</button>
+			</header>
+			<main id="Mountain-Console" class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+                       <div id="squiresQuestingMountain"></div>
+					</div>
+					<footer class="menu-controls">
+						<button class="btn" id="Mountain-Return-Some" style="display:none" onclick="sign.leaveMountainSome()" ><span class="num-selected"><span id="questorsMQ"></span></span></button>
+						<button class="btn" id="Mountain-Return-All"  onclick="sign.leaveMountainAll()" >Return All</button>
+					</footer>
+				    <footer class="menu-controls">
+						<button class="btn" id="Mountain-Return-All-Restart"  onclick="sign.leaveMountainAllRestart()" >Return All and Restart Quest</button>
+					</footer>
+				</div>
+			</main>
+		</div>
+	
+
+    	<div id="Mountain-Menu__Loot" class="menu quest-menu">
+			<header class="menu-header">
+				<button id="Close-quest-Loot-Mountain" class="close-menu" style="display:none"></button>
+				<div class="menu-label">Mountain Loot Received</div>
+				<p class="menu-description" id="Mountain-Description-Loot">Your loot from questing in the Mountain</p>
+				<p id="restartedMountain" style="display:none" class="menu-description">Your Squires have also been sent back to the Mountain!</p>
+			</header>
+			<main class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+                         <p class="menu-description">
+			        	  <span id="Mountain-Squires"></span> squire(s) returned from the Mountain.
+			        	</p><br>
+                       	<div class="menu-label">$FIEF (<span id="fief-total-mountain"></span>)</div>
+			        	<p class="menu-description">
+			        	  <span id="Mountain-Fief"></span>
+			        	<br>
+			            <div class="menu-label">Rewards (<span id="reward-total-mountain"></span>)</div>
+			        	<p class="menu-description">
+			        	  <span id="Mountain-Rewards"></span>
+			        	<br>
+			              <div class="menu-label">Stat Upgrades (<span id="upgrade-total-mountain"></span>)</div>
+			        	<p class="menu-description">
+			        	<span id="Mountain-Stats"></span>
+			        	</p>
+					</div>
+				</div>
+			</main>
+		</div>	
+	
+	
+		
+			<!-- cavern -->
+		<div id="Cavern-Menu__Send" class="menu quest-menu">
+			<header class="menu-header">
+				<button  id="Close-Cavern-Send" class="close-menu"></button>
+				<div class="menu-label">Cavern</div>
+				<!--<p class="menu-description" id="Cavern-Description-Send">Cavern Questing will Begin Shortly</p>-->
+				<p class="menu-description" id="Cavern-Description-Send">Select the squires you would like to send off questing</p>
+				<button id="Cavern-return" class="btn" onclick="runQuestingcavern()">Check Squires Ready to Return</button>
+				<button id="refresh-return-cavern" class="btn" onclick="runTowncavern()">Refresh</button>
+			</header>
+			<main id="Cavern-Console-Send" class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+					        <div id="squiresWaitingCavern"></div>
+					</div>
+					<footer class="menu-controls">
+						<button class="btn" id="Cavern-Send-Some" style="display:none" onclick="sign.questCavernFew()"><span class="num-selected"><span id="questorsC"></span></span></button>
+						<button class="btn" id="Cavern-Send-All" onclick="sign.questCavernAll()">Send All</button>
+					</footer>
+				</div>
+			</main>
+		</div>
+		
+		<div id="Cavern-Menu__Return" class="menu quest-menu">
+			<header class="menu-header">
+				<button id="Close-Cavern-Return" class="close-menu"></button>
+				<div class="menu-label">Cavern</div>
+				<p class="menu-description" id="Cavern-Description-Return">Select the squires you would like to return from questing</p>
+						<p class="menu-description" id="Cavern-Description-Returning" style="display:none">Returning Squires and Gathering Rewards<br><img class="menu-description" style="width:25%; display: block;margin-left: auto;margin-right: auto;" src="https://knightsoftheether.com/tnet/images/loading.gif"><br><i style="color:grey">Gathering rewards can take up to 3 minutes</i></p>
+				<button id="Cavern-quest" class="btn" onclick="runTowncavern()">Check Squires Ready to Quest</button>
+				<p id="Cavern-message" class="menu-description" style="color:grey; text-size:20px">*If you can't see your squires, hit <i>refresh</i> below</p>
+				<button id="refresh-quest-cavern" class="btn" onclick="runQuestingcavern()">Refresh</button>
+			</header>
+			<main id="Cavern-Console" class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+                       <div id="squiresQuestingCavern"></div>
+					</div>
+					<footer class="menu-controls">
+						<button class="btn" id="Cavern-Return-Some" style="display:none" onclick="sign.leaveCavernSome()" ><span class="num-selected"><span id="questorsCQ"></span></span></button>
+						<button class="btn" id="Cavern-Return-All"  onclick="sign.leaveCavernAll()" >Return All</button>
+					</footer>
+				    <footer class="menu-controls">
+						<button class="btn" id="Cavern-Return-All-Restart"  onclick="sign.leaveCavernAllRestart()" >Return All and Restart Quest</button>
+					</footer>
+				</div>
+			</main>
+		</div>
+	
+
+    	<div id="Cavern-Menu__Loot" class="menu quest-menu">
+			<header class="menu-header">
+				<button id="Close-quest-Loot-Cavern" class="close-menu" style="display:none"></button>
+				<div class="menu-label">Cavern Loot Received</div>
+				<p class="menu-description" id="Cavern-Description-Loot">Your loot from questing in the Cavern</p>
+				<p id="restartedCavern" style="display:none" class="menu-description">Your Squires have also been sent back to the Cavern!</p>
+			</header>
+			<main class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+                         <p class="menu-description">
+			        	  <span id="Cavern-Squires"></span> squire(s) returned from the Cavern.
+			        	</p><br>
+                       	<div class="menu-label">$FIEF (<span id="fief-total-cavern"></span>)</div>
+			        	<p class="menu-description">
+			        	  <span id="Cavern-Fief"></span>
+			        	<br>
+			            <div class="menu-label">Rewards (<span id="reward-total-cavern"></span>)</div>
+			        	<p class="menu-description">
+			        	  <span id="Cavern-Rewards"></span>
+			        	<br>
+			              <div class="menu-label">Stat Upgrades (<span id="upgrade-total-cavern"></span>)</div>
+			        	<p class="menu-description">
+			        	<span id="Cavern-Stats"></span>
+			        	</p>
+					</div>
+				</div>
+			</main>
+		</div>	
+    
+	
+		<!-- forest -->
+		<div id="Forest-Menu__Send" class="menu quest-menu">
+			<header class="menu-header">
+				<button  id="Close-Forest-Send" class="close-menu"></button>
+				<div class="menu-label">Forest</div>
+				<!--<p class="menu-description" id="Forest-Description-Send">Forest Questing will Begin Shortly</p>-->
+				<p class="menu-description" id="Forest-Description-Send">Select the squires you would like to send off questing</p>
+				<button id="Forest-return" class="btn" onclick="runQuestingforest()">Check Squires Ready to Return</button>
+				<button id="refresh-return-forest" class="btn" onclick="runTownforest()">Refresh</button>
+				<button id="Forest-return-old" style="position:absolute; top:40; left:10;" class="btn" onclick="runQuestingforestOld()">Old Contract</button>
+			</header>
+			<main id="Forest-Console-Send" class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+					        <div id="squiresWaitingForest"></div>
+					</div>
+					<footer class="menu-controls">
+						<button class="btn" id="Forest-Send-Some" style="display:none" onclick="sign.questForestFew()"><span class="num-selected"><span id="questorsF"></span></span></button>
+						<button class="btn" id="Forest-Send-All" onclick="sign.questForestAll()">Send All</button>
+					</footer>
+				</div>
+			</main>
+		</div>
+		
+		<div id="Forest-Menu__Return" class="menu quest-menu">
+			<header class="menu-header">
+				<button id="Close-Forest-Return" class="close-menu"></button>
+				<div class="menu-label">Forest</div>
+				<p class="menu-description" id="Forest-Description-Return">Select the squires you would like to return from questing</p>
+							<p class="menu-description" id="Forest-Description-Returning" style="display:none">Returning Squires and Gathering Rewards<br><img class="menu-description" style="width:25%; display: block;margin-left: auto;margin-right: auto;" src="https://knightsoftheether.com/tnet/images/loading.gif"><br><i style="color:grey">Gathering rewards can take up to 3 minutes</i></p>
+				<button id="Forest-quest" class="btn" onclick="runTownforest()">Check Squires Ready to Quest</button>
+				<p id="Forest-message" class="menu-description" style="color:grey; text-size:20px">*If you can't see your squires, hit <i>refresh</i> below</p>
+				<button id="refresh-quest-forest" class="btn" onclick="runQuestingforest()">Refresh</button>
+			</header>
+			<main id="Forest-Console" class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+                       <div id="squiresQuestingForest"></div>
+					</div>
+					<footer class="menu-controls">
+						<button class="btn" id="Forest-Return-Some" style="display:none" onclick="sign.leaveForestSome()" ><span class="num-selected"><span id="questorsFQ"></span></span></button>
+						<button class="btn" id="Forest-Return-All"  onclick="sign.leaveForestAll()" >Return All</button>
+					</footer>
+				    <footer class="menu-controls">
+						<button class="btn" id="Forest-Return-All-Restart"  onclick="sign.leaveForestAllRestart()" >Return All and Restart Quest</button>
+					</footer>
+				</div>
+			</main>
+		</div>
+	
+		<div id="Forest-Menu__Return-Old" class="menu quest-menu">
+			<header class="menu-header">
+				<button id="Close-Forest-Return-Old" class="close-menu"></button>
+				<div class="menu-label">Forest</div>
+				<p class="menu-description" id="Forest-Description-Return-Old">Return all Squires from Old Contract</p>
+				<button id="Forest-quest-Old" class="btn" onclick="runTownforest()">Check Squires Ready to Quest</button>
+				<p id="Forest-message-Old" class="menu-description" style="color:grey; text-size:20px">*If you can't see your squires, hit <i>refresh</i> below</p>
+				<button id="refresh-quest-forest-Old" class="btn" onclick="runQuestingforestOld()">Refresh</button>
+			</header>
+			<main id="Forest-Console-Old" class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+                       <div id="squiresQuestingForestOld"></div>
+					</div>
+					<footer class="menu-controls">
+						<button class="btn" id="Forest-Return-All-Old"  onclick="sign.leaveForestAllOld()" >Return All From Old Contract</button>
+					</footer>
+				</div>
+			</main>
+		</div>
+
+    	<div id="Forest-Menu__Loot" class="menu quest-menu">
+			<header class="menu-header">
+				<button id="Close-quest-Loot-Forest" class="close-menu" style="display:none"></button>
+				<div class="menu-label">Forest Loot Received</div>
+				<p class="menu-description" id="Forest-Description-Loot">Your loot from questing in the Forest</p>
+				<p id="restartedForest" style="display:none" class="menu-description">Your Squires have also been sent back to the Forest!</p>
+			</header>
+			<main class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+                         <p class="menu-description">
+			        	  <span id="Forest-Squires"></span> squire(s) returned from the Forest.
+			        	</p><br>
+                       	<div class="menu-label">$FIEF (<span id="fief-total"></span>)</div>
+			        	<p class="menu-description">
+			        	  <span id="Forest-Fief"></span>
+			        	<br>
+			              <div class="menu-label">Stat Upgrades (<span id="upgrade-total"></span>)</div>
+			        	<p class="menu-description">
+			        	<span id="Forest-Stats"></span>
+			        	</p>
+					</div>
+				</div>
+			</main>
+		</div>
+		
+
+		<!-- temple -->
+		<div id="Temple-Menu__Send" class="menu quest-menu">
+			<header class="menu-header">
+				<button  id="Close-Temple-Send" class="close-menu"></button>
+				<div class="menu-label">Temple</div>
+				<p class="menu-description" id="Temple-Closed" style="display:none">Temple is closed until the next day of worship.<br><br>You can return your Squires Only</p>
+				<!--<p class="menu-description" id="Temple-Description-Send">Temple Questing will Begin Shortly</p>-->
+				<p class="menu-description" id="Temple-Description-Send">Select the squires you would like to send off questing</p>
+				<button id="Temple-return" class="btn" onclick="runQuestingtemple()">Check Squires Ready to Return</button>
+				<button id="refresh-return-temple" class="btn" onclick="runTowntemple()">Refresh</button>
+			</header>
+			<main id="Temple-Console-Send" class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+					        <div id="squiresWaitingTemple"></div>
+					</div>
+					<footer class="menu-controls">
+						<button class="btn" id="Temple-Send-Some" style="display:none" onclick="sign.questTempleFew()"><span class="num-selected"><span id="questorsT"></span></span></button>
+						<button class="btn" id="Temple-Send-All" onclick="sign.questTempleAll()">Send All</button>
+					</footer>
+				</div>
+			</main>
+		</div>
+		
+		<div id="Temple-Menu__Return" class="menu quest-menu">
+			<header class="menu-header">
+				<button id="Close-Temple-Return" class="close-menu"></button>
+				<div class="menu-label">Temple</div>
+				<p class="menu-description" id="Temple-Description-Return">Select the squires you would like to return from questing</p>
+				<p class="menu-description" id="Temple-Description-Returning" style="display:none">Returning Squires and Gathering Rewards<br><img class="menu-description" style="width:25%; display: block;margin-left: auto;margin-right: auto;" src="https://knightsoftheether.com/tnet/images/loading.gif"><br><i style="color:grey">Gathering rewards can take up to 3 minutes</i></p>
+				<button id="Temple-quest" class="btn" onclick="runTowntemple()">Check Squires Ready to Quest</button>
+				<p id="Temple-message" class="menu-description" style="color:grey; text-size:20px">*If you can't see your squires, hit <i>refresh</i> below</p>
+				<button id="refresh-quest-temple" class="btn" onclick="runQuestingtemple()">Refresh</button>
+			</header>
+			<main id="Temple-Console" class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+                       <div id="squiresQuestingTemple"></div>
+					</div>
+					<footer class="menu-controls">
+						<button class="btn" id="Temple-Return-Some" style="display:none" onclick="sign.leaveTempleSome()" ><span class="num-selected"><span id="questorsTQ"></span></span></button>
+						<button class="btn" id="Temple-Return-All"  onclick="sign.leaveTempleAll()" >Return All</button>
+					</footer>
+				    <footer class="menu-controls" id="restart-temple-closed">
+						<button class="btn" id="Temple-Return-All-Restart"  onclick="sign.leaveTempleAllRestart()" >Return All and Restart Quest</button>
+					</footer>
+				</div>
+			</main>
+		</div>
+	
+
+    	<div id="Temple-Menu__Loot" class="menu quest-menu">
+			<header class="menu-header">
+				<button id="Close-quest-Loot-Temple" class="close-menu"></button>
+				<div class="menu-label">Temple Loot Received</div>
+				<p class="menu-description" id="Temple-Description-Loot">Your loot from questing in the Temple</p>
+				<p id="restartedTemple" style="display:none" class="menu-description">Your Squires have also been sent back to the Temple!</p>
+			</header>
+			<main class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+                         <p class="menu-description">
+			        	  <span id="Temple-Squires"></span> squire(s) returned from the Temple.
+			        	</p><br>
+                       	<div class="menu-label">$FIEF (<span id="fief-total-temple"></span>)</div>
+			        	<p class="menu-description">
+			        	  <span id="Temple-Fief"></span>
+			        	<br>
+			              <div class="menu-label">Stat Upgrades (<span id="upgrade-total-temple"></span>)</div>
+			        	<p class="menu-description">
+			        	<span id="Temple-Stats"></span>
+			        	</p>
+					</div>
+				</div>
+			</main>
+		</div>
+
+
+    
+    <!--Closed Buttons-->
+    <!--Town-->
+		<div id="Town-Menu__Send" class="menu quest-menu">
+			<header class="menu-header">
+				<button id="Close-Town" class="close-menu"></button>
+				<div class="menu-label">Town</div>
+				<p class="menu-description">Currently closed for repairs.</p>
+			</header>
+		</div>
+	    <!--Jeweler-->
+		<div id="Jeweler-Menu__Send" class="menu quest-menu">
+			<header class="menu-header">
+				<button id="Close-Jeweler" class="close-menu"></button>
+				<div class="menu-label">Jeweler</div>
+				<p class="menu-description">Currently closed for repairs.</p>
+			</header>
+		</div>
+		    <!--Blacksmith-->
+		<div id="Blacksmith-Menu__Send" class="menu quest-menu">
+			<header class="menu-header">
+				<button  id="Close-Blacksmith"  class="close-menu"></button>
+				<div class="menu-label">Blacksmith</div>
+				<p class="menu-description">Currently closed for repairs.</p>
+			</header>
+		</div>
+			    <!--Alchemist-->
+		<div id="Alchemist-Menu__Send" class="menu quest-menu">
+			<header class="menu-header">
+				<button id="Close-Alchemist" class="close-menu"></button>
+				<div class="menu-label">Alchemist</div>
+				<p class="menu-description">Currently closed for repairs.</p>
+			</header>
+		</div>
+
+		<!--Inventory-->	
+		<div id="Inventory-Squires" class="menu quest-menu">
+			<header class="menu-header">
+				<button  id="Close-Inventory-Squires" class="close-menu"></button>
+				<div class="menu-label">Squires:  <span id="squires-total-inventory"></span></div>
+				<button id="refresh-squire-inventory" class="btn" onclick="squiresInventory()">Refresh</button>
+					   <p  class="menu-description">Squires Questing: <span id="squires-total-questing"></span></p>
+					   <p  class="menu-description">Squires in Town: <span id="squires-total-town"></span></p>
+			</header>
+			<main id="Squire-Console" class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+					        <div id="squiresInventory"></div>
+					</div>
+				</div>
+			</main>
+		</div>
+	
+	     <div id="Inventory-Fief" class="menu quest-menu">
+			<header class="menu-header">
+				<button id="Close-Inventory-Fief" class="close-menu"></button>
+				<div  class="menu-label">$FIEF: <span id="fief-total-inventory"></span></div>
+			   <p id="fief-input-amount-text" class="menu-description">Input Amount of $FIEF to Send:</p>
+				<input id="fief-input-amount" type="number" style="width:25%; text-align:center">
+				<p id="fief-input-address-text" class="menu-description">Input Address to Send to:</p>
+				<input id="fief-input-address" type="text" style="width:75%; text-align:center">
+				<button id="send-fief-button" class ="btn" onclick="sign.sendfief()">Send FIEF</button>
+			</header>
+		</div>
+	
+		 <div id="Inventory-Potion" class="menu quest-menu">
+			<header class="menu-header">
+				<div class="menu-label">Potions:  <span id="potionTotal-inventory"></span></div>
+				<button id="Close-Inventory-Potion" class="close-menu"></button>
+			</header>
+					<main id="Potion-Console" class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/potions/Luck Potion.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p1"></span></li> </ul> <button class="btn quest" id="squires">Luck Potion</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/potions/Levitation Potion.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p2"></span></li> </ul> <button class="btn quest" id="squires">Levitation Potion</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/potions/Strong Brew.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p3"></span></li> </ul> <button class="btn quest" id="squires">Strong Brew</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/potions/Pava Root Potion.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p4"></span></li> </ul> <button class="btn quest" id="squires">Pava Root Potion</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/potions/Spring Water Flask.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p5"></span></li> </ul> <button class="btn quest" id="squires">Spring Water Flask</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/potions/Mirroring Potion.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p6"></span></li> </ul> <button class="btn quest" id="squires">Mirroring Potion</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/potions/Phial of Defense.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p7"></span></li> </ul> <button class="btn quest" id="squires">Phial of Defense</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/potions/Slime Vial.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p8"></span></li> </ul> <button class="btn quest" id="squires">Slime Vial</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/potions/Ichor Draft.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p9"></span></li> </ul> <button class="btn quest" id="squires">Ichor Draft</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/potions/Holy Water.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p10"></span></li> </ul> <button class="btn quest" id="squires">Holy Water</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/potions/Murky Flask.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p11"></span></li> </ul> <button class="btn quest" id="squires">Murky Flask</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/potions/Arcane Brew.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p12"></span></li> </ul> <button class="btn quest" id="squires">Arcane Brew</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/potions/Berserkers Brew.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p13"></span></li> </ul> <button class="btn quest" id="squires">Berserkers Brew</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/potions/Spirit Vial.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p14"></span></li> </ul> <button class="btn quest" id="squires">Spirit Vial</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/potions/Flask of Resolve.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p15"></span></li> </ul> <button class="btn quest" id="squires">Flask of Resolve</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/potions/Lucidity Elixir.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p16"></span></li> </ul> <button class="btn quest" id="squires">Lucidity Elixir</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/potions/Philter of Redemption.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p17"></span></li> </ul> <button class="btn quest" id="squires">Philter of Redemption</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Epic</div> <img src="https://knightsoftheether.com/squires/images/potions/Lavender Extract.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p18"></span></li> </ul> <button class="btn quest" id="squires">Lavender Extract</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Epic</div> <img src="https://knightsoftheether.com/squires/images/potions/Trippie Draught.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p19"></span></li> </ul> <button class="btn quest" id="squires">Trippie Draught</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Epic</div> <img src="https://knightsoftheether.com/squires/images/potions/Phantom Phial.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p20"></span></li> </ul> <button class="btn quest" id="squires">Phantom Phial</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Epic</div> <img src="https://knightsoftheether.com/squires/images/potions/Bloodlust Flask.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p21"></span></li> </ul> <button class="btn quest" id="squires">Bloodlust Flask</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Legendary</div> <img src="https://knightsoftheether.com/squires/images/potions/Misty Phial.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p22"></span></li> </ul> <button class="btn quest" id="squires">Misty Phial</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Legendary</div> <img src="https://knightsoftheether.com/squires/images/potions/Spirit Elixir.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p23"></span></li> </ul> <button class="btn quest" id="squires">Spirit Elixir</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Legendary</div> <img src="https://knightsoftheether.com/squires/images/potions/Dew Drop Vial.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p24"></span></li> </ul> <button class="btn quest" id="squires">Dew Drop Vial</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Legendary</div> <img src="https://knightsoftheether.com/squires/images/potions/Master Brew.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="p25"></span></li> </ul> <button class="btn quest" id="squires">Master Brew</button> </div> </div>
+		</div>
+			</div>
+			</main>
+			
+		</div>
+
+		
+		
+
+	
+		 <div id="Inventory-Ring" class="menu quest-menu">
+			<header class="menu-header">
+				<div class="menu-label">Rings:  <span id="ringTotal-inventory"></span></div>
+				<button id="Close-Inventory-Ring" class="close-menu"></button>
+			</header>
+					<main id="Ring-Console" class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/rings/Gold Ring of Burn Defense.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r1"></span></li> </ul> <button class="btn quest" id="squires">Gold Ring of Burn Defense</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/rings/Gold Ring of Avoidance.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r2"></span></li> </ul> <button class="btn quest" id="squires">Gold Ring of Avoidance</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/rings/Steel Ring of Fiendsbane.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r3"></span></li> </ul> <button class="btn quest" id="squires">Steel Ring of Fiendsbane</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/rings/Titanium Ring of Fey Resistance.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r4"></span></li> </ul> <button class="btn quest" id="squires">Titanium Ring of Fey Resistance</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/rings/Gold Ring of Energy.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r5"></span></li> </ul> <button class="btn quest" id="squires">Gold Ring of Energy</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/rings/Titanium Ring of the Forest.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r6"></span></li> </ul> <button class="btn quest" id="squires">Titanium Ring of the Forest</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/rings/Silver Ring of Restoration.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r7"></span></li> </ul> <button class="btn quest" id="squires">Silver Ring of Restoration</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/rings/Bronze Ring of Alchemy.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r8"></span></li> </ul> <button class="btn quest" id="squires">Bronze Ring of alchemy</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/rings/Platinum Ring of Confusion.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r9"></span></li> </ul> <button class="btn quest" id="squires">Platinum Ring of Confusion</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/rings/Rose Gold Ring of Reaction.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r10"></span></li> </ul> <button class="btn quest" id="squires">Rose Gold Ring of Reaction</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/rings/Diamond Ring of Spikes.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r11"></span></li> </ul> <button class="btn quest" id="squires">Diamond Ring of Spikes</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/rings/Brass Ring of Advantage.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r12"></span></li> </ul> <button class="btn quest" id="squires">Brass Ring of Advantage</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/rings/Kyanite Ring of Courage.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r13"></span></li> </ul> <button class="btn quest" id="squires">Kyanite Ring of Courage</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/rings/Gold Ring of Ingenuity.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r14"></span></li> </ul> <button class="btn quest" id="squires">Gold Ring of Ingenuity</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/rings/Silver Ring of the Deep Sleep.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r15"></span></li> </ul> <button class="btn quest" id="squires">Silver Ring of the Deep Sleep</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Epic</div> <img src="https://knightsoftheether.com/squires/images/rings/Gold Ring of Combustion.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r16"></span></li> </ul> <button class="btn quest" id="squires">Gold Ring of Combustion</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Epic</div> <img src="https://knightsoftheether.com/squires/images/rings/Silver Ring of Duplication.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r17"></span></li> </ul> <button class="btn quest" id="squires">Silver Ring of Duplication</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Epic</div> <img src="https://knightsoftheether.com/squires/images/rings/Brass Ring of Quick Reflexes.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r18"></span></li> </ul> <button class="btn quest" id="squires">Brass Ring of Quick Reflexes</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Epic</div> <img src="https://knightsoftheether.com/squires/images/rings/Marble Ring of Retention.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r19"></span></li> </ul> <button class="btn quest" id="squires">Marble Ring of Retention</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Epic</div> <img src="https://knightsoftheether.com/squires/images/rings/Pearl Ring of Spirit.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r20"></span></li> </ul> <button class="btn quest" id="squires">Pearl Ring of Spirit</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Legendary</div> <img src="https://knightsoftheether.com/squires/images/rings/Stone Ring of Increase.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r21"></span></li> </ul> <button class="btn quest" id="squires">Stone Ring of Increase</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Legendary</div> <img src="https://knightsoftheether.com/squires/images/rings/Steel Ring of Protection.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r22"></span></li> </ul> <button class="btn quest" id="squires">Steel Ring of Protection</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Legendary</div> <img src="https://knightsoftheether.com/squires/images/rings/Gold Ring of Determination.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r23"></span></li> </ul> <button class="btn quest" id="squires">Gold Ring of Determination</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Legendary</div> <img src="https://knightsoftheether.com/squires/images/rings/Amber Ring of Withstanding.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r24"></span></li> </ul> <button class="btn quest" id="squires">Amber Ring of Withstanding</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Legendary</div> <img src="https://knightsoftheether.com/squires/images/rings/Etheric Ring of Renewal.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="r25"></span></li> </ul> <button class="btn quest" id="squires">Etheric Ring of Renewal</button> </div> </div>		</div>
+			</div>
+			</main>
+			
+		</div>
+
+		 <div id="Inventory-Trinket" class="menu quest-menu">
+			<header class="menu-header">
+				<div class="menu-label">Trinkets:  <span id="trinketTotal-inventory"></span></div>
+				<button id="Close-Inventory-Trinket" class="close-menu"></button>
+			</header>
+					<main id="Trinket-Console" class="menu-main">
+				<div class="content">
+					<div class="menu-list scrolling-list">
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Wee Red Mushroom.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t1"></span></li> </ul> <button class="btn quest" id="squires">Wee Red Mushroom</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Pine Resin.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t2"></span></li> </ul> <button class="btn quest" id="squires">Pine Resin</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Birdcage.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t3"></span></li> </ul> <button class="btn quest" id="squires">Birdcage</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Glowing Rune.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t4"></span></li> </ul> <button class="btn quest" id="squires">Glowing Rune</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Ether Crystal.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t5"></span></li> </ul> <button class="btn quest" id="squires">Ether Crystal</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Rabbit Foot.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t6"></span></li> </ul> <button class="btn quest" id="squires">Rabbit Foot</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Common</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Poisonous Frog.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t7"></span></li> </ul> <button class="btn quest" id="squires">Poisonous Frog</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Acorns.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t8"></span></li> </ul> <button class="btn quest" id="squires">Acorns</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Torch.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t9"></span></li> </ul> <button class="btn quest" id="squires">Torch</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Dream Amulet.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t10"></span></li> </ul> <button class="btn quest" id="squires">Dream Amulet</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Dusty Scroll.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t11"></span></li> </ul> <button class="btn quest" id="squires">Dusty Scroll</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Crustacean Claw.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t12"></span></li> </ul> <button class="btn quest" id="squires">Crustacean Claw</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Goblet.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t13"></span></li> </ul> <button class="btn quest" id="squires">Goblet</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Uncommon</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Draca Fangs.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t14"></span></li> </ul> <button class="btn quest" id="squires">Draca Fangs</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Gargoyle.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t15"></span></li> </ul> <button class="btn quest" id="squires">Gargoyle</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Bat Wing.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t16"></span></li> </ul> <button class="btn quest" id="squires">Bat Wing</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Runic Tome.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t17"></span></li> </ul> <button class="btn quest" id="squires">Runic Tome</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Lucky Die.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t18"></span></li> </ul> <button class="btn quest" id="squires">Lucky Die</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Rare</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Golem Eye.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t19"></span></li> </ul> <button class="btn quest" id="squires">Golem Eye</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Epic</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Phoenix Egg.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t20"></span></li> </ul> <button class="btn quest" id="squires">Phoenix Egg</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Epic</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Abyssal Talisman.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t21"></span></li> </ul> <button class="btn quest" id="squires">Abyssal Talisman</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Epic</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Enchanted Goggles.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t22"></span></li> </ul> <button class="btn quest" id="squires">Enchanted Goggles</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Epic</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Magic Coinpurse.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t23"></span></li> </ul> <button class="btn quest" id="squires">Magic Coinpurse</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Legendary</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Hand Candle.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t24"></span></li> </ul> <button class="btn quest" id="squires">Hand Candle</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Legendary</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Mask of Valathor.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t25"></span></li> </ul> <button class="btn quest" id="squires">Mask of Valathor</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Legendary</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Wild Cucumber.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t26"></span></li> </ul> <button class="btn quest" id="squires">Wild Cucumber</button> </div> </div>
+<div class="item token" id="squireSelected"> <div class="token-image"> <div class="menu-label">Legendary</div> <img src="https://knightsoftheether.com/squires/images/trinkets/Underdark Egg.png" /> </div> <div class="token-stats"><ul><li class="stat">Amount: <span class="stat-value" id="t27"></span></li> </ul> <button class="btn quest" id="squires">UnderDark Egg</button> </div> </div>
+		</div>
+			</div>
+			</main>
+			
+		</div>
+
+		 <div id="Inventory-Gear" class="menu quest-menu">
+			<header class="menu-header">
+				<button id="Close-Inventory-Gear" class="close-menu"></button>
+				<div class="menu-label">Gear Inventory</div>
+				<p class="menu-description">Gear inventory coming with release of Gears!</p>
+				<!--<button class ="btn" onclick="sign.approveForest()">Approve Forest</button>-->
+				<!--<button class ="btn" onclick="sign.approveMountain()">Approve Mountain</button>-->
+				<!--<button  class ="btn" onclick="sign.approveCavern()">Approve Cavern</button>-->
+				<!--<button  class ="btn" onclick="sign.approveTemple()">Approve Temple</button>-->
+			</header>
+		</div>
+		
+	<!--approvals-->
+	   <div id="Forest-Menu__Approve" class="menu quest-menu" style="z-index:9999999999999999999999999999">
+			<header class="menu-header">
+				<div class="menu-label">Forest Questing</div>
+				<p class="menu-description">Hey! We recently pushed an update to our contracts</p>
+				<p class="menu-description">Approve the Forest Questing Contract To Start Questing</p><br>
+							<p class="menu-description">After you've aproved, head over to Forest to return squires from the old contract</p>
+				<button class ="btn" onclick="sign.approveForest()">Approve New Forest Contract</button>
+			</header>
+		</div>
+		 <div id="Cavern-Menu__Approve" class="menu quest-menu" style="z-index:9999999999999999999999999999">
+			<header class="menu-header">
+				<div class="menu-label">Cavern Questing</div>
+				<p class="menu-description">We also  released the cavern contract!</p>
+				<p class="menu-description">Approve the Cavern Questing Contract To Start Questing the Cavern</p><br>
+				<button class ="btn" onclick="sign.approveCavern()">Approve New Cavern Contract</button>
+			</header>
+		</div>
+		<div id="Mountain-Menu__Approve" class="menu quest-menu" style="z-index:9999999999999999999999999999">
+			<header class="menu-header">
+				<div class="menu-label">Mountain Questing</div>
+				<p class="menu-description">Hey! We recently released new questing contracts</p>
+				<p class="menu-description">Approve the Mountain Questing Contract To Start Questing the Mountain</p><br>
+				<button class ="btn" onclick="sign.approveMountain()">Approve New Mountain Contract</button>
+			</header>
+		</div>
+		<div id="Temple-Menu__Approve" class="menu quest-menu" style="z-index:9999999999999999999999999999">
+			<header class="menu-header">
+				<div class="menu-label">Temple Questing</div>
+				<p class="menu-description">Hey! We recently released a new questing contract:<br>Temple!</p><br>
+				<p class="menu-description">Approve the Contract To Start Questing</p><br>
+				<button class ="btn" onclick="sign.approveTemple()">Approve Temple Contract</button>
+			</header>
+		</div>
+	
+
+		
+		
+</div>	
+
+
+
+<style>
+  .loader-logo {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  top:40%;
+}
+    .loader {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  top:40%;
+  border-radius: 90%;
+  background: linear-gradient(45deg, transparent 40%, skyblue);
+  animation: move 0.8s linear infinite;
+}
+.loader::before {
+  position: absolute;
+  content: "";
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  background: #000;
+  border-radius: 90%;
+}
+.loader::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 90%;
+  background: linear-gradient(45deg, transparent 40%, skyblue);
+  filter: blur(20px);
+}
+@keyframes move {
+  to {
+    transform: rotate(360deg);
+    filter: hue-rotate(360deg);
+  }
+}
+</style>
+	
+	<!-- connect wallet -->	
+	 <div id="prepare" > 
+		 <div class="centered" id="image" style="display:none">
+  <img src="https://knightsoftheether.com/squires/images/logo_title_only.png">
+    </div>
+    <div class="centered_music">
+     <p class="menu-description" style="color:rgba(255, 255, 255, 0.8)" >*Once connected, this website will play music</p>
+    </div>
+	 <div class="centered_btn" id ="connectb" style="display:none">
+    <button id="btn-connect" class="Connect__Button">Connect Wallet</button> 
+    </div>
+    	 <div class="loader" id ="loading" ><span id="white"></span></div>
+    	    <div class="loader-logo" id="logo-loading" style="z-index:100000000000000000000000000000;">
+            <img src="https://knightsoftheether.com/squires/images/unnamed.png" style=" width: 150px; height: 150px;">
+        </div>
+    
+	 <div class="centered_tutorial"  id ="tutorialb" style="display:none">
+	     <a target="_blank" href="https://medium.com/@AdamInEtherland/the-great-faq-of-our-time-7b8634ecdf52">
+    <button style="text-decoration:none" class="Connect__Button">Read FAQ</button> 
+            </a>
+    </div>
+
+    
+    </div>
+	
+	
+	<style>
+	    @keyframes pulse {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.1);}
+  100% {transform: scale(1);}
+}
+.pulse {
+  animation-name: pulse;
+  animation-duration: 1s;
+}
+
+.animated {
+  animation-duration: 2.5s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
+	</style>
+	
+	<!-- gate -->
+	<div id="Gate" style="display:none">
+		<button id="Gate__Button" class="btn" onclick="enterGate()">Enter The Gates</button>
+    <div id="wrong-network" class="centered_alert" style="display:none;">
+     <p class="menu-description animated pulse" style="color:white; font-weight:600" >You are on the wrong network.<br><a style="text-decoration:none; font-weight:800; color:#b91809" >Switch to Arbitrum</a> to Unlock the Gate.</p>
+    </div>
+     <div id="no-squires" class="centered_alert" style="display:none;">
+     <p class="menu-description animated pulse" style="color:white; font-weight:600" >You do not own any Squires.<br><span style="color:#b91809">You must have at least 1 Squire</span> to Unlock the Gate.</p>
+     </div>
+    <div id="no-knights" class="centered_alert-knights" style="display:none;">
+     <p class="menu-description animated pulse" style="color:white; font-weight:600" >You do not own any Knights.<br><a href="https://opensea.io/collection/knightsoftheethernft" target="_blank" style="text-decoration:none; font-weight:800; color:#b91809">Purchase at least 1 Knight</a> to Unlock the Gate.</p>
+     </div>
+		<div id="Gate__Left"></div>
+		<div id="Gate__Right"></div>
+	</div>
+	
+	<div id="WrongNetwork" style="display:none">
+    <div  class="centered_alert" >
+     <p class="menu-description animated pulse" style="color:white; font-weight:600" >You are on the wrong network.<br><a style="text-decoration:none; font-weight:800; color:#b91809" >Switch to Arbitrum</a> to Unlock the Gate.</p>
+    </div>
+		<div id="Gate__Left"></div>
+		<div id="Gate__Right"></div>
+	</div>
+	
+	
+	
+	<!-- world -->
+	<div id="World">
+		<!-- fog -->
+		<div id="World__Fog">
+			<div id="World__Fog__Layer-1" class="fog"><img src="https://knightsoftheether.com/beta/i/kote-fog-1.png"></div>
+			<div id="World__Fog__Layer-2" class="fog"><img src="https://knightsoftheether.com/beta/i/kote-fog-2.png"></div>
+		</div>
+		<!-- map -->
+		<div id="World__Map">
+			<!-- zone labels -->
+			<div id="World__Map__Labels">
+				<button id="Town-Label" class="btn">Town</button>
+				<button id="Jeweler-Label" class="btn">Jeweler</button>
+				<button id="Blacksmith-Label" class="btn">Blacksmith</button>
+				<button id="Alchemist-Label" class="btn">Alchemist</button>
+				<button id="Forest-Label" class="btn quest">Forest</button>
+				<button id="Temple-Label" class="btn quest">Temple</button>
+				<button id="Mountain-Label" class="btn quest">Mountain</button>
+				<button id="Cavern-Label" class="btn quest">Cavern</button>
+			</div>
+			<!-- zone regions -->
+			<div id="World__Map__Regions">
+				<div id="Alchemist" class="map-region">
+					<img src="https://knightsoftheether.com/beta/i/kote-map-alchemist-hovered.png">
+				</div>
+				<div id="Temple" class="map-region">
+					<img src="https://knightsoftheether.com/beta/i/kote-map-altar-hovered.png">
+				</div>
+				<div id="Blacksmith" class="map-region">
+					<img src="https://knightsoftheether.com/beta/i/kote-map-blacksmiths-hovered.png">
+				</div>
+				<div id="Cavern" class="map-region">
+					<img src="https://knightsoftheether.com/beta/i/kote-map-cavern-hovered.png">
+				</div>
+				<div id="Forest" class="map-region">
+					<img src="https://knightsoftheether.com/beta/i/kote-map-forest-hovered.png">
+				</div>
+				<div id="Jeweler" class="map-region">
+					<img src="https://knightsoftheether.com/beta/i/kote-map-jewelers-hovered.png">
+				</div>
+				<div id="Mountain" class="map-region">
+					<img src="https://knightsoftheether.com/beta/i/kote-map-mountain-hovered.png">
+				</div>
+				<div id="Town" class="map-region">
+					<img src="https://knightsoftheether.com/beta/i/kote-map-town-hovered.png">
+				</div>
+			</div>
+		</div>
+		
+		<div class="Audio-Toggle-Name"><i>Music by Premes</i></div>
+		<button id="Audio-Toggle" onclick="play()">
+            <img src="https://knightsoftheether.com/beta/i/kote-icon-sound.png">
+        </button>
+        <audio id="Audio-Play" autoplay loop src="https://knightsoftheether.com/tnet-main/music/atmo2_1.mp3"></audio>
+		
+		<script>
+	function play()
+      {
+        var myAudio = document.getElementById("Audio-Play");
+        var audioButton = document.getElementById("Audio-Toggle");
+        if(myAudio.paused) {
+            myAudio.play();
+            audioButton.classList.remove("Off")
+        }
+        else {
+            myAudio.pause();
+            audioButton.classList.add("Off")
+        } 
+      }
+		</script>
+		
+	</div>
+</div>
+
+<!-- partial -->
+
+<script>
+   /*! modernizr 3.6.0 (Custom Build) | MIT *
+ * https://modernizr.com/download/?-webp-webpalpha-webpanimation-webplossless_webp_lossless-setclasses !*/
+!function(A,e,n){function a(A,e){return typeof A===e}function o(){var A,e,n,o,s,i,r;for(var f in l)if(l.hasOwnProperty(f)){if(A=[],e=l[f],e.name&&(A.push(e.name.toLowerCase()),e.options&&e.options.aliases&&e.options.aliases.length))for(n=0;n<e.options.aliases.length;n++)A.push(e.options.aliases[n].toLowerCase());for(o=a(e.fn,"function")?e.fn():e.fn,s=0;s<A.length;s++)i=A[s],r=i.split("."),1===r.length?Modernizr[r[0]]=o:(!Modernizr[r[0]]||Modernizr[r[0]]instanceof Boolean||(Modernizr[r[0]]=new Boolean(Modernizr[r[0]])),Modernizr[r[0]][r[1]]=o),t.push((o?"":"no-")+r.join("-"))}}function s(A){var e=c.className,n=Modernizr._config.classPrefix||"";if(u&&(e=e.baseVal),Modernizr._config.enableJSClass){var a=new RegExp("(^|\\s)"+n+"no-js(\\s|$)");e=e.replace(a,"$1"+n+"js$2")}Modernizr._config.enableClasses&&(e+=" "+n+A.join(" "+n),u?c.className.baseVal=e:c.className=e)}function i(A,e){if("object"==typeof A)for(var n in A)f(A,n)&&i(n,A[n]);else{A=A.toLowerCase();var a=A.split("."),o=Modernizr[a[0]];if(2==a.length&&(o=o[a[1]]),"undefined"!=typeof o)return Modernizr;e="function"==typeof e?e():e,1==a.length?Modernizr[a[0]]=e:(!Modernizr[a[0]]||Modernizr[a[0]]instanceof Boolean||(Modernizr[a[0]]=new Boolean(Modernizr[a[0]])),Modernizr[a[0]][a[1]]=e),s([(e&&0!=e?"":"no-")+a.join("-")]),Modernizr._trigger(A,e)}return Modernizr}var t=[],l=[],r={_version:"3.6.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(A,e){var n=this;setTimeout(function(){e(n[A])},0)},addTest:function(A,e,n){l.push({name:A,fn:e,options:n})},addAsyncTest:function(A){l.push({name:null,fn:A})}},Modernizr=function(){};Modernizr.prototype=r,Modernizr=new Modernizr;var f,c=e.documentElement,u="svg"===c.nodeName.toLowerCase();!function(){var A={}.hasOwnProperty;f=a(A,"undefined")||a(A.call,"undefined")?function(A,e){return e in A&&a(A.constructor.prototype[e],"undefined")}:function(e,n){return A.call(e,n)}}(),r._l={},r.on=function(A,e){this._l[A]||(this._l[A]=[]),this._l[A].push(e),Modernizr.hasOwnProperty(A)&&setTimeout(function(){Modernizr._trigger(A,Modernizr[A])},0)},r._trigger=function(A,e){if(this._l[A]){var n=this._l[A];setTimeout(function(){var A,a;for(A=0;A<n.length;A++)(a=n[A])(e)},0),delete this._l[A]}},Modernizr._q.push(function(){r.addTest=i}),Modernizr.addAsyncTest(function(){function A(A,e,n){function a(e){var a=e&&"load"===e.type?1==o.width:!1,s="webp"===A;i(A,s&&a?new Boolean(a):a),n&&n(e)}var o=new Image;o.onerror=a,o.onload=a,o.src=e}var e=[{uri:"data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=",name:"webp"},{uri:"data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAABBxAR/Q9ERP8DAABWUDggGAAAADABAJ0BKgEAAQADADQlpAADcAD++/1QAA==",name:"webp.alpha"},{uri:"data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA",name:"webp.animation"},{uri:"data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=",name:"webp.lossless"}],n=e.shift();A(n.name,n.uri,function(n){if(n&&"load"===n.type)for(var a=0;a<e.length;a++)A(e[a].name,e[a].uri)})}),Modernizr.addAsyncTest(function(){var A=new Image;A.onerror=function(){i("webplossless",!1,{aliases:["webp-lossless"]})},A.onload=function(){i("webplossless",1==A.width,{aliases:["webp-lossless"]})},A.src="data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA="}),Modernizr.addAsyncTest(function(){var A=new Image;A.onerror=function(){i("webpalpha",!1,{aliases:["webp-alpha"]})},A.onload=function(){i("webpalpha",1==A.width,{aliases:["webp-alpha"]})},A.src="data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAABBxAR/Q9ERP8DAABWUDggGAAAADABAJ0BKgEAAQADADQlpAADcAD++/1QAA=="}),Modernizr.addAsyncTest(function(){var A=new Image;A.onerror=function(){i("webpanimation",!1,{aliases:["webp-animation"]})},A.onload=function(){i("webpanimation",1==A.width,{aliases:["webp-animation"]})},A.src="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"}),o(),s(t),delete r.addTest,delete r.addAsyncTest;for(var p=0;p<Modernizr._q.length;p++)Modernizr._q[p]();A.Modernizr=Modernizr}(window,document); 
+</script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+  <script  src="https://knightsoftheether.com/squires/scripts/script.js?29"></script>
+     <script src="https://knightsoftheether.com/squires/scripts/eth.js?121"></script> 
+     <script src="https://knightsoftheether.com/tnet-5202022-main/scripts/eth-m.js?18"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/web3@1.2.11/dist/web3.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/web3modal@1.9.0/dist/index.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.2.1/dist/umd/index.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/fortmatic@2.0.6/dist/fortmatic.js"></script>
+  <script src="https://knightsoftheether.com/squires/scripts/connect.js?114"></script>
+</body>
+</html>
