@@ -75,510 +75,509 @@ var closeJeweler = document.getElementById("Close-Jeweler");
 var closeBlacksmith = document.getElementById("Close-Blacksmith");
 var closeAlchemist = document.getElementById("Close-Alchemist");
 
-$(closeMenu).click(function () {
-  $(site).addClass("no-menus no-fog");
+$(closeMenu).click(function() {
+    $(site).addClass("no-menus no-fog");
 });
 
 
-$(forestLabel).click(function () {
+$(forestLabel).click(function() {
     runTownforest();
     runQuestingforest();
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $(site).removeClass("no-fog no-menus");
-  $("#Forest-Menu__Send").addClass("menu-active");
-  $("#Forest-Menu__Loot").removeClass("menu-active");
-  $("#Temple-Menu__Loot").removeClass("menu-active");
-  $("#Cavern-Menu__Loot").removeClass("menu-active");
-  $("#Mountain-Menu__Loot").removeClass("menu-active");
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $(site).removeClass("no-fog no-menus");
+    $("#Forest-Menu__Send").addClass("menu-active");
+    $("#Forest-Menu__Loot").removeClass("menu-active");
+    $("#Temple-Menu__Loot").removeClass("menu-active");
+    $("#Cavern-Menu__Loot").removeClass("menu-active");
+    $("#Mountain-Menu__Loot").removeClass("menu-active");
 });
 
-$(forestReturn).click(function () {
-  $(site).removeClass("no-fog no-menus");
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $("#Forest-Menu__Return").addClass("menu-active");
-  $("#Forest-Menu__Send").removeClass("menu-active");
+$(forestReturn).click(function() {
+    $(site).removeClass("no-fog no-menus");
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Forest-Menu__Return").addClass("menu-active");
+    $("#Forest-Menu__Send").removeClass("menu-active");
 });
 
-$(forestQuest).click(function () {
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $("#Forest-Menu__Return").removeClass("menu-active");
-  $("#Forest-Menu__Send").addClass("menu-active");
+$(forestQuest).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Forest-Menu__Return").removeClass("menu-active");
+    $("#Forest-Menu__Send").addClass("menu-active");
 });
 
-$(templeLabel).click(function () {
-checkApproveTemple();
+$(templeLabel).click(function() {
+    checkApproveTemple();
 });
 
-$(templeReturn).click(function () {
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $("#Temple-Menu__Return").addClass("menu-active");
-  $("#Temple-Menu__Send").removeClass("menu-active");
+$(templeReturn).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Temple-Menu__Return").addClass("menu-active");
+    $("#Temple-Menu__Send").removeClass("menu-active");
 });
 
-$(templeQuest).click(function () {
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $("#Temple-Menu__Return").removeClass("menu-active");
-  $("#Temple-Menu__Send").addClass("menu-active");
+$(templeQuest).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Temple-Menu__Return").removeClass("menu-active");
+    $("#Temple-Menu__Send").addClass("menu-active");
 });
 
-$(mountainLabel).click(function () {
-        runTownmountain();
+$(mountainLabel).click(function() {
+    runTownmountain();
     runQuestingmountain();
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $(site).removeClass("no-fog no-menus");
-  $("#Mountain-Menu__Send").addClass("menu-active");
-  $("#Mountain-Menu__Loot").removeClass("menu-active");
-  $("#Forest-Menu__Loot").removeClass("menu-active");
-  $("#Temple-Menu__Loot").removeClass("menu-active");
-  $("#Cavern-Menu__Loot").removeClass("menu-active");
-  $("#Mountain-Menu__Loot").removeClass("menu-active");
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $(site).removeClass("no-fog no-menus");
+    $("#Mountain-Menu__Send").addClass("menu-active");
+    $("#Mountain-Menu__Loot").removeClass("menu-active");
+    $("#Forest-Menu__Loot").removeClass("menu-active");
+    $("#Temple-Menu__Loot").removeClass("menu-active");
+    $("#Cavern-Menu__Loot").removeClass("menu-active");
+    $("#Mountain-Menu__Loot").removeClass("menu-active");
 });
 
-$(mountainReturn).click(function () {
-  $(site).removeClass("no-fog no-menus");
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $("#Mountain-Menu__Return").addClass("menu-active");
-  $("#Mountain-Menu__Send").removeClass("menu-active");
+$(mountainReturn).click(function() {
+    $(site).removeClass("no-fog no-menus");
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Mountain-Menu__Return").addClass("menu-active");
+    $("#Mountain-Menu__Send").removeClass("menu-active");
 });
 
-$(mountainQuest).click(function () {
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $("#Mountain-Menu__Return").removeClass("menu-active");
-  $("#Mountain-Menu__Send").addClass("menu-active");
+$(mountainQuest).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Mountain-Menu__Return").removeClass("menu-active");
+    $("#Mountain-Menu__Send").addClass("menu-active");
 });
 
-$(cavernLabel).click(function () {
+$(cavernLabel).click(function() {
     runTowncavern();
     runQuestingcavern();
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $(site).removeClass("no-fog no-menus");
-  $("#Cavern-Menu__Send").addClass("menu-active");
-  $("#Forest-Menu__Loot").removeClass("menu-active");
-  $("#Temple-Menu__Loot").removeClass("menu-active");
-  $("#Cavern-Menu__Loot").removeClass("menu-active");
-  $("#Mountain-Menu__Loot").removeClass("menu-active");
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $(site).removeClass("no-fog no-menus");
+    $("#Cavern-Menu__Send").addClass("menu-active");
+    $("#Forest-Menu__Loot").removeClass("menu-active");
+    $("#Temple-Menu__Loot").removeClass("menu-active");
+    $("#Cavern-Menu__Loot").removeClass("menu-active");
+    $("#Mountain-Menu__Loot").removeClass("menu-active");
 });
 
-$(cavernReturn).click(function () {
-  $(site).removeClass("no-fog no-menus");
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $("#Cavern-Menu__Return").addClass("menu-active");
-  $("#Cavern-Menu__Send").removeClass("menu-active");
+$(cavernReturn).click(function() {
+    $(site).removeClass("no-fog no-menus");
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Cavern-Menu__Return").addClass("menu-active");
+    $("#Cavern-Menu__Send").removeClass("menu-active");
 });
 
-$(cavernQuest).click(function () {
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $("#Cavern-Menu__Return").removeClass("menu-active");
-  $("#Cavern-Menu__Send").addClass("menu-active");
+$(cavernQuest).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Cavern-Menu__Return").removeClass("menu-active");
+    $("#Cavern-Menu__Send").addClass("menu-active");
 });
 
 
 
 
-
-$(townLabel).click(function () {
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $(site).removeClass("no-fog no-menus");
-  $("#Town-Menu__Send").addClass("menu-active");
+$(townLabel).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $(site).removeClass("no-fog no-menus");
+    $("#Town-Menu__Send").addClass("menu-active");
 });
 
-$(jewelerLabel).click(function () {
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $(site).removeClass("no-fog no-menus");
-  $("#Jeweler-Menu__Send").addClass("menu-active");
+$(jewelerLabel).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $(site).removeClass("no-fog no-menus");
+    $("#Jeweler-Menu__Send").addClass("menu-active");
 });
 
-$(blacksmithLabel).click(function () {
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $(site).removeClass("no-fog no-menus");
-  $("#Blacksmith-Menu__Send").addClass("menu-active");
+$(blacksmithLabel).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $(site).removeClass("no-fog no-menus");
+    $("#Blacksmith-Menu__Send").addClass("menu-active");
 });
 
-$(alchemistLabel).click(function () {
-  $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $(site).removeClass("no-fog no-menus");
-  $("#Alchemist-Menu__Send").addClass("menu-active");
+$(alchemistLabel).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $(site).removeClass("no-fog no-menus");
+    $("#Alchemist-Menu__Send").addClass("menu-active");
 });
 
 
 //inventory
 
-$(squiresInventory).click(function () {
-  $(site).removeClass("no-fog no-menus");
-  $("#Inventory-Squires").addClass("menu-active");
+$(squiresInventory).click(function() {
+    $(site).removeClass("no-fog no-menus");
+    $("#Inventory-Squires").addClass("menu-active");
 });
 
-$(closesquiresInventory).click(function () {
-  $("#Inventory-Squires").removeClass("menu-active");
-   $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-   $(site).addClass("no-fog no-menus");
+$(closesquiresInventory).click(function() {
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $(site).addClass("no-fog no-menus");
 });
 
-$(ringInventory).click(function () {
-  $(site).removeClass("no-fog no-menus");
-   $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $("#Inventory-Ring").addClass("menu-active");
+$(ringInventory).click(function() {
+    $(site).removeClass("no-fog no-menus");
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Inventory-Ring").addClass("menu-active");
 });
 
-$(closeringInventory).click(function () {
-  $("#Inventory-Ring").removeClass("menu-active");
-   $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-   $(site).addClass("no-fog no-menus");
+$(closeringInventory).click(function() {
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $(site).addClass("no-fog no-menus");
 });
 
-$(potionInventory).click(function () {
-  $(site).removeClass("no-fog no-menus");
-   $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $("#Inventory-Potion").addClass("menu-active");
+$(potionInventory).click(function() {
+    $(site).removeClass("no-fog no-menus");
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Inventory-Potion").addClass("menu-active");
 });
 
-$(closepotionInventory).click(function () {
-     $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-   $(site).addClass("no-fog no-menus");
+$(closepotionInventory).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $(site).addClass("no-fog no-menus");
 });
 
-$(trinketInventory).click(function () {
-     $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $(site).removeClass("no-fog no-menus");
-  $("#Inventory-Trinket").addClass("menu-active");
+$(trinketInventory).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $(site).removeClass("no-fog no-menus");
+    $("#Inventory-Trinket").addClass("menu-active");
 });
 
-$(closetrinketInventory).click(function () {
-     $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-   $(site).addClass("no-fog no-menus");
+$(closetrinketInventory).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $(site).addClass("no-fog no-menus");
 });
 
-$(gearInventory).click(function () {
-     $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $(site).removeClass("no-fog no-menus");
-  $("#Inventory-Gear").addClass("menu-active");
+$(gearInventory).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $(site).removeClass("no-fog no-menus");
+    $("#Inventory-Gear").addClass("menu-active");
 });
 
-$(closegearInventory).click(function () {
-     $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-   $(site).addClass("no-fog no-menus");
+$(closegearInventory).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $(site).addClass("no-fog no-menus");
 });
 
-$(fiefInventory).click(function () {
-     $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $(site).removeClass("no-fog no-menus");
-  $("#Inventory-Fief").addClass("menu-active");
+$(fiefInventory).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $(site).removeClass("no-fog no-menus");
+    $("#Inventory-Fief").addClass("menu-active");
 });
 
-$(closefiefInventory).click(function () {
-     $("#Inventory-Fief").removeClass("menu-active");
-  $("#Inventory-Gear").removeClass("menu-active");
-  $("#Inventory-Trinket").removeClass("menu-active");
-  $("#Inventory-Potion").removeClass("menu-active");
-  $("#Inventory-Ring").removeClass("menu-active");
- $("#Inventory-Squires").removeClass("menu-active");
-  $("#Inventory-Fief").removeClass("menu-active");
-   $(site).addClass("no-fog no-menus");
+$(closefiefInventory).click(function() {
+    $("#Inventory-Fief").removeClass("menu-active");
+    $("#Inventory-Gear").removeClass("menu-active");
+    $("#Inventory-Trinket").removeClass("menu-active");
+    $("#Inventory-Potion").removeClass("menu-active");
+    $("#Inventory-Ring").removeClass("menu-active");
+    $("#Inventory-Squires").removeClass("menu-active");
+    $("#Inventory-Fief").removeClass("menu-active");
+    $(site).addClass("no-fog no-menus");
 });
 
 
 
 //closing buttons
-$(closeMountainSend).click(function () {
-  $("#Mountain-Menu__Send").removeClass("menu-active");
-  $("#Mountain-Menu__Return").removeClass("menu-active");
+$(closeMountainSend).click(function() {
+    $("#Mountain-Menu__Send").removeClass("menu-active");
+    $("#Mountain-Menu__Return").removeClass("menu-active");
 });
-$(closeMountainReturn).click(function () {
-  $("#Mountain-Menu__Send").removeClass("menu-active");
-  $("#Mountain-Menu__Return").removeClass("menu-active");
-});
-
-$(closeTempleSend).click(function () {
-  $("#Temple-Menu__Send").removeClass("menu-active");
-  $("#Temple-Menu__Return").removeClass("menu-active");
-});
-$(closeTempleReturn).click(function () {
-  $("#Temple-Menu__Send").removeClass("menu-active");
-  $("#Temple-Menu__Return").removeClass("menu-active");
+$(closeMountainReturn).click(function() {
+    $("#Mountain-Menu__Send").removeClass("menu-active");
+    $("#Mountain-Menu__Return").removeClass("menu-active");
 });
 
-$(closeForestSend).click(function () {
-  $("#Forest-Menu__Send").removeClass("menu-active");
-  $("#Forest-Menu__Return").removeClass("menu-active");
+$(closeTempleSend).click(function() {
+    $("#Temple-Menu__Send").removeClass("menu-active");
+    $("#Temple-Menu__Return").removeClass("menu-active");
 });
-$(closeForestReturn).click(function () {
-  $("#Forest-Menu__Send").removeClass("menu-active");
-  $("#Forest-Menu__Return").removeClass("menu-active");
-});
-
-$(closeCavernSend).click(function () {
-  $("#Cavern-Menu__Send").removeClass("menu-active");
-  $("#Cavern-Menu__Return").removeClass("menu-active");
-});
-$(closeCavernReturn).click(function () {
-  $("#Cavern-Menu__Send").removeClass("menu-active");
-  $("#Cavern-Menu__Return").removeClass("menu-active");
+$(closeTempleReturn).click(function() {
+    $("#Temple-Menu__Send").removeClass("menu-active");
+    $("#Temple-Menu__Return").removeClass("menu-active");
 });
 
-$(closeTown).click(function () {
-  $("#Town-Menu__Send").removeClass("menu-active");
+$(closeForestSend).click(function() {
+    $("#Forest-Menu__Send").removeClass("menu-active");
+    $("#Forest-Menu__Return").removeClass("menu-active");
 });
-$(closeJeweler).click(function () {
-  $("#Jeweler-Menu__Send").removeClass("menu-active");
+$(closeForestReturn).click(function() {
+    $("#Forest-Menu__Send").removeClass("menu-active");
+    $("#Forest-Menu__Return").removeClass("menu-active");
 });
-$(closeBlacksmith).click(function () {
-  $("#Blacksmith-Menu__Send").removeClass("menu-active");
+
+$(closeCavernSend).click(function() {
+    $("#Cavern-Menu__Send").removeClass("menu-active");
+    $("#Cavern-Menu__Return").removeClass("menu-active");
 });
-$(closeAlchemist).click(function () {
-  $("#Alchemist-Menu__Send").removeClass("menu-active");
+$(closeCavernReturn).click(function() {
+    $("#Cavern-Menu__Send").removeClass("menu-active");
+    $("#Cavern-Menu__Return").removeClass("menu-active");
+});
+
+$(closeTown).click(function() {
+    $("#Town-Menu__Send").removeClass("menu-active");
+});
+$(closeJeweler).click(function() {
+    $("#Jeweler-Menu__Send").removeClass("menu-active");
+});
+$(closeBlacksmith).click(function() {
+    $("#Blacksmith-Menu__Send").removeClass("menu-active");
+});
+$(closeAlchemist).click(function() {
+    $("#Alchemist-Menu__Send").removeClass("menu-active");
 });
 
 
 //Looting
-$(closeForestQuestLoot).click(function () {
-  $("#Forest-Menu__Loot").removeClass("menu-active");
- $("#Forest-Menu__Send").removeClass("menu-active");
-  $("#Forest-Menu__Return").removeClass("menu-active");
-   $(site).addClass("no-fog no-menus");
+$(closeForestQuestLoot).click(function() {
+    $("#Forest-Menu__Loot").removeClass("menu-active");
+    $("#Forest-Menu__Send").removeClass("menu-active");
+    $("#Forest-Menu__Return").removeClass("menu-active");
+    $(site).addClass("no-fog no-menus");
 });
 
-$(closeTempleQuestLoot).click(function () {
-  $("#Temple-Menu__Loot").removeClass("menu-active");
- $("#Temple-Menu__Send").removeClass("menu-active");
-  $("#Temple-Menu__Return").removeClass("menu-active");
-   $(site).addClass("no-fog no-menus");
+$(closeTempleQuestLoot).click(function() {
+    $("#Temple-Menu__Loot").removeClass("menu-active");
+    $("#Temple-Menu__Send").removeClass("menu-active");
+    $("#Temple-Menu__Return").removeClass("menu-active");
+    $(site).addClass("no-fog no-menus");
 });
 
-$(closeMountainQuestLoot).click(function () {
-  $("#Mountain-Menu__Loot").removeClass("menu-active");
- $("#Mountain-Menu__Send").removeClass("menu-active");
-  $("#Mountain-Menu__Return").removeClass("menu-active");
-   $(site).addClass("no-fog no-menus");
+$(closeMountainQuestLoot).click(function() {
+    $("#Mountain-Menu__Loot").removeClass("menu-active");
+    $("#Mountain-Menu__Send").removeClass("menu-active");
+    $("#Mountain-Menu__Return").removeClass("menu-active");
+    $(site).addClass("no-fog no-menus");
 });
 
-$(closeCavernQuestLoot).click(function () {
-  $("#Cavern-Menu__Loot").removeClass("menu-active");
- $("#Cavern-Menu__Send").removeClass("menu-active");
-  $("#Cavern-Menu__Return").removeClass("menu-active");
-   $(site).addClass("no-fog no-menus");
+$(closeCavernQuestLoot).click(function() {
+    $("#Cavern-Menu__Loot").removeClass("menu-active");
+    $("#Cavern-Menu__Send").removeClass("menu-active");
+    $("#Cavern-Menu__Return").removeClass("menu-active");
+    $(site).addClass("no-fog no-menus");
 });
 
 
-$(inventoryItem).click(function () {
-  $(this).toggleClass("active").siblings().removeClass("active");
+$(inventoryItem).click(function() {
+    $(this).toggleClass("active").siblings().removeClass("active");
 });
 
 gateBtn.addEventListener("mouseenter", () => {
-  gate.classList.add("hovered");
+    gate.classList.add("hovered");
 });
 gateBtn.addEventListener("mouseleave", () => {
-  gate.classList.remove("hovered");
+    gate.classList.remove("hovered");
 });
 alchemistLabel.addEventListener("mouseenter", () => {
-  alchemistBuilding.classList.add("active");
-  worldMap.classList.add("iso");
+    alchemistBuilding.classList.add("active");
+    worldMap.classList.add("iso");
 });
 alchemistLabel.addEventListener("mouseleave", () => {
-  alchemistBuilding.classList.remove("active");
-  worldMap.classList.remove("iso");
+    alchemistBuilding.classList.remove("active");
+    worldMap.classList.remove("iso");
 });
 blacksmithLabel.addEventListener("mouseenter", () => {
-  blacksmithBuilding.classList.add("active");
-  worldMap.classList.add("iso");
+    blacksmithBuilding.classList.add("active");
+    worldMap.classList.add("iso");
 });
 blacksmithLabel.addEventListener("mouseleave", () => {
-  blacksmithBuilding.classList.remove("active");
-  worldMap.classList.remove("iso");
+    blacksmithBuilding.classList.remove("active");
+    worldMap.classList.remove("iso");
 });
 templeLabel.addEventListener("mouseenter", () => {
-  templeBuilding.classList.add("active");
-  worldMap.classList.add("iso");
+    templeBuilding.classList.add("active");
+    worldMap.classList.add("iso");
 });
 templeLabel.addEventListener("mouseleave", () => {
-  templeBuilding.classList.remove("active");
-  worldMap.classList.remove("iso");
+    templeBuilding.classList.remove("active");
+    worldMap.classList.remove("iso");
 });
 cavernLabel.addEventListener("mouseenter", () => {
-  cavernBuilding.classList.add("active");
-  worldMap.classList.add("iso");
+    cavernBuilding.classList.add("active");
+    worldMap.classList.add("iso");
 });
 cavernLabel.addEventListener("mouseleave", () => {
-  cavernBuilding.classList.remove("active");
-  worldMap.classList.remove("iso");
+    cavernBuilding.classList.remove("active");
+    worldMap.classList.remove("iso");
 });
 forestLabel.addEventListener("mouseenter", () => {
-  forestBuilding.classList.add("active");
-  worldMap.classList.add("iso");
+    forestBuilding.classList.add("active");
+    worldMap.classList.add("iso");
 });
 forestLabel.addEventListener("mouseleave", () => {
-  forestBuilding.classList.remove("active");
-  worldMap.classList.remove("iso");
+    forestBuilding.classList.remove("active");
+    worldMap.classList.remove("iso");
 });
 jewelerLabel.addEventListener("mouseenter", () => {
-  jewelerBuilding.classList.add("active");
-  worldMap.classList.add("iso");
+    jewelerBuilding.classList.add("active");
+    worldMap.classList.add("iso");
 });
 jewelerLabel.addEventListener("mouseleave", () => {
-  jewelerBuilding.classList.remove("active");
-  worldMap.classList.remove("iso");
+    jewelerBuilding.classList.remove("active");
+    worldMap.classList.remove("iso");
 });
 mountainLabel.addEventListener("mouseenter", () => {
-  mountainBuilding.classList.add("active");
-  worldMap.classList.add("iso");
+    mountainBuilding.classList.add("active");
+    worldMap.classList.add("iso");
 });
 mountainLabel.addEventListener("mouseleave", () => {
-  mountainBuilding.classList.remove("active");
-  worldMap.classList.remove("iso");
+    mountainBuilding.classList.remove("active");
+    worldMap.classList.remove("iso");
 });
 townLabel.addEventListener("mouseenter", () => {
-  townBuilding.classList.add("active");
-  worldMap.classList.add("iso");
+    townBuilding.classList.add("active");
+    worldMap.classList.add("iso");
 });
 townLabel.addEventListener("mouseleave", () => {
-  townBuilding.classList.remove("active");
-  worldMap.classList.remove("iso");
+    townBuilding.classList.remove("active");
+    worldMap.classList.remove("iso");
 });
 
 
 function enterGate() {
-  gate.classList.add("entered");
-  world.classList.add("discovered");
-  site.classList.add("no-fog");
-  checkApproveForest();
-  setTimeout(function () {
-    gateBtn.remove();
-  }, 500);
-  setTimeout(function () {
-    gate.remove();
-    inventoryMenu.classList.add("ready");
-  }, 2000);
+    gate.classList.add("entered");
+    world.classList.add("discovered");
+    site.classList.add("no-fog");
+    checkApproveForest();
+    setTimeout(function() {
+        gateBtn.remove();
+    }, 500);
+    setTimeout(function() {
+        gate.remove();
+        inventoryMenu.classList.add("ready");
+    }, 2000);
 }
 
 function toggleInventory() {
-  inventoryMenu.classList.toggle("active");
+    inventoryMenu.classList.toggle("active");
 }
 
 inventoryHeader.onclick = toggleInventory;
